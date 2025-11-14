@@ -7,12 +7,12 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import authRoutes from "./routes/authRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 const app = express();
 dotenv.config();
 connectDB();
 app.use(express.json());
-app.use(errorHandler);
 app.use(cors());
 app.use(cookieParser());
 app.use(morgan("dev"));
@@ -21,7 +21,10 @@ app.use(morgan("dev"));
 app.use("/api/auth", authRoutes);
 // task routes
 app.use("/api/tasks", taskRoutes);
+// admin routes
+app.use("/api/admin", adminRoutes);
 
+app.use(errorHandler);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
